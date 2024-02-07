@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- defineContent("title")  ||  'فروشگاه کتابخانه'  %>     </title>
+
+
+    <link rel="stylesheet" href="/css/reset.css">
+
+    <link rel="stylesheet" href="/fonts/all.min.css">
+    <link rel="stylesheet" href="/fonts/FA5/css/all.min.css">
+    <link rel="stylesheet" href="/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="/fonts/font-face.css">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/tailwindcss/output.css">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.min.css">
+    <%- style %>
+</head>
+<body>
+
+    <div id="active-sidebar" class="active-sidebar hiddens" >
+        <div id="closeSidebarIcon" class="close-icon">
+            <span>&times;</span>
+            <!-- <i class="fa fa-remove"></i> -->
+        </div>
+        <div class="logo">
+            <a href="/">
+                <i class="fa fa-book"></i>
+                <span >کتابخانه </span>
+            </a>
+        </div>
+        <input class="search-input" type="search" name="" id="" placeholder="نام کتاب نویسنده شماره شابک را جستجو کنید">
+        <div class="sidebar-links">
+            <% if(req.isAuthenticated()) { %> 
+                    
+                <a class="user-info" href="/user/panel">
+                    <% if(req.user.avatar !== null){ %>
+                        <div class="user-avatar">
+                            <img src="<%= req.user.avatar %>" alt="<%= req.user.username %>" srcset="">
+                        </div>
+                            <span><%= req.user.username %></span>
+                    <% } else { %>
+                        <i class="fas fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout">
+                    <i class="fa fa-user-times"></i>
+                    <span>خروج</span>
+                </a>    
+            <% } else { %> 
+            
+            <a href="/auth">
+                <i class='fa fa-user-circle-o'></i>
+                <span>ثبت نام / ورود</span> 
+            </a>
+            <% }  %>
+            
+            <a href="/liked">
+                <!-- <i class='fa fa-heart-o'></i> -->
+                <i class="far fa-heart"></i>
+                <span>مورد علاقه ها</span>
+            </a>
+            <a href="/user/pursuit_order">
+                <i class='fa fa-compass'></i>
+                <span>پیگیری سفارش </span>
+            </a>
+            <a href="/contact_with_us">
+                <i class='fa fa-envelope'></i>
+                ارتباط با ما
+            </a>
+            <a href="/help">
+                <i class='fa fa-info-circle'></i>
+                راهنما
+            </a>
+            <div class="site-nav">
+                <a href="#">
+                    <span>خرید توسط دسته بندی</span>
+                </a>
+                <a href="#">
+                    <span>جدید ترین ها</span>
+                </a>
+                <a href="#">
+                    <span>پرفروش ترین ها</span>
+                </a>
+                <a href="#">
+                    <span>به زودی</span>
+                </a>
+                <a href="#">
+                    <span>نشر جدید</span>
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="overlay" class="hidden"></div>
+
+    <header>
+
+        <div id="navTop" class="nav-top">
+            <div class="nav-top__contetnt">
+                <div class="nav-top__right">
+                    <% if(req.isAuthenticated()) { %> 
+
+                        <a class="user-info" href="/user/panel">
+                            <% if(req.user.avatar !== null){ %>
+                                <div class="user-avatar">
+                                    <img src="<%= req.user.avatar %>" alt="<%= req.user.username %>" srcset="">
+                                </div>
+                                    <span><%= req.user.username %></span>
+                            <% } else { %>
+                                <i class="fas fa-user"></i>
+                            <% } %>
+                        </a>
+                        
+                        <a href="/logout">
+                            <i class="fa fa-user-times"></i>
+                            <span>خروج</span>
+                        </a>    
+                    <% } else { %> 
+                    
+                    <a href="/auth">
+                        <i class='fa fa-user-circle-o'></i>
+                        <span>ثبت نام / ورود</span> 
+                    </a>
+                    <% }  %>
+                    
+                    <a href="/liked">
+                        <!-- <i class='fa fa-heart-o'></i> -->
+                        <i class="far fa-heart"></i>
+                        <span>مورد علاقه ها</span>
+                    </a>
+                    <a href="/user/pursuit_order">
+                        <i class='fa fa-compass'></i>
+                        <span>پیگیری سفارش </span>
+                    </a>
+                </div>
+                <div class="nav-top__left">
+                    <a href="/contact_with_us">
+                        <i class='fa fa-envelope'></i>
+                        ارتباط با ما
+                    </a>
+                    <a href="/help">
+                        <i class='fa fa-info-circle'></i>
+                        راهنما
+                    </a>
+                    <a href="/">
+                        <i class='fa fa-home'></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="nav-main">
+            <div id="openSidebarIcon" class="burger-menu">
+                <i class="fa fa-bars"></i>
+            </div>
+            <a href="/" class="logo">
+                    <i class="fa fa-book"></i>
+                    <span >کتابخانه </span>
+            </a>
+            <div class="user">
+                <% if(req.isAuthenticated()) { %> 
+                    <a href="/user/panel">
+                        <% if(req.user.avatar !== null){ %>
+                            <div class="user-avatar">
+                                <img src="<%= req.user.avatar %>" alt="<%= req.user.username %>" srcset="">
+                            </div>
+                        <% } else { %>
+                            <i class="fas fa-user"></i>
+                        <% } %>
+                    </a>
+                <% } else { %>                 
+                    <a href="/auth">
+                        <i class='fa fa-user-circle-o'></i>
+                        <span>ثبت نام / ورود</span> 
+                    </a>
+                <% }  %>
+            </div>
+            <div class="search">
+                <form class="search-form" action="/search" method="post">
+                    <i class="fa fa-search" id="searchIcon" style="visibility: hidden;"></i>
+
+                    <input type="text" name="data" onfocus="showIcon()"   class="search-input" placeholder="جستجو کتاب با کلمات کلیدی عنوان / نویسنده / کد کتاب">
+                    
+                    <button type="submit" class="search-button__submit">جستجو</button>
+
+                </form>
+            </div>
+        </div>
+        <div class="nav-bottom">
+            <div class="nav-bottom__right">
+
+                <nav>
+                    <menu>
+                        <div class="menuitem first-menu-item">
+                            <a href="/books">
+                                <span>خرید توسط دسته بندی</span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <menu>
+                                <% categories.forEach(category => { %>
+                                    <% if(category.parent === null) { %>  
+
+                                <div class="menuitem"> 
+                                    <a href="/category/<%= category.slug %>" ><%= category.name %> </a>
+                                    <% if(category.childrens.length !== 0) { %> 
+                                        <i class="fa fa-angle-left"> </i> 
+                                        <menu>
+                                            <% category.childrens.forEach(children => {  %> 
+                                                <div class="menuitem">
+                                                    <a href="/category/<%= children.slug %>"><%= children.name %></a> 
+                                                </div>
+
+                                            <% }) %>
+                                        </menu>
+                                    <% } %>
+
+
+                                </div>
+                                    <% } %>
+                                
+                                <% }) %>
+                                <div class="menuitem"> <a href="">item1</a> </div>
+                                <div class="menuitem"> <a href="">item2</a> 
+                                    <menu>
+                                        <div class="menuitem"><a href="">sub item2 1</a> </div>
+                                        <div class="menuitem"><a href="">sub item2 2</a> </div>
+                                        <div class="menuitem"><a href="">sub item2 3</a> </div>
+                                        <div class="menuitem"><a href="">sub item2 4</a> </div>
+                                        <div class="menuitem"><a href="">sub item2 5</a> </div>
+                                    </menu>
+                                </div>
+                                <div class="menuitem"> 
+                                    <a href="">more</a> 
+                                    <menu>
+                                        <div class="menuitem"><a href="">test</a></div>
+                                        <div class="menuitem">
+                                            <a href="">deeper</a>
+                                            <menu> 
+                                                <div class="menuitem"><a href="">deeper 1</a></div>
+                                                <div class="menuitem"><a href="">deeper 2</a></div>
+                                                <div class="menuitem"><a href="">deeper 3</a></div>
+                                            </menu>
+                                        </div>
+                                    </menu>
+                                </div>
+
+
+                            </menu>
+
+                        </div>
+                    </menu>
+                </nav> 
+             
+                <a href="#">
+                    <span>جدید ترین ها</span>
+                </a>
+                <a href="#">
+                    <span>پرفروش ترین ها</span>
+                </a>
+                <a href="#">
+                    <span>به زودی</span>
+                </a>
+                <a href="#">
+                    <span>نشر جدید</span>
+                </a>
+
+            </div>
+
+            <div class="nav-bottom__left">
+                    <select name="" id="language-select">
+                        <option value="">
+                            فارسی 
+                            <i class="fa fa-chevron-down"></i>
+                        </option>
+                        <option value="">
+                            Eng
+                        </option>
+                    </select>
+                    <div id="shop-basket">
+                        <span id='selected-cost'>0.00 تومان</span>
+                        <span id='selected-amount'>0</span>
+                        <a href="#">
+                            <i class="fa fa-shopping-basket"></i>
+                        </a>
+                    </div>
+            </div>
+
+        </div>
+        
+
+    </header>
+
+    <%- body %>
+    
+    <footer id="footer">
+        <div class="news-latter">
+            <i class="fa fa-envelope"></i>
+            <p>جهت دریافت آخرین تخفیف ها و محصولات </br>
+                 در خبر نامه عضو شوید.</p>
+            <form action="#" >
+                <input type="text" name="newslatter" id="news-latter__input" placeholder="آدرس ایمیل">
+                <button type="submit">عضویت</button>
+            </form>
+        </div>
+        <div class="follow-us">
+            <span>ما را دنبال کنید :</span>
+            <div class="follow-us__icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <!-- <a href="#"><i class="fa fa-facebook"></i></a>  -->
+                <!-- <a href="#"><i class="fa fa-instagram"></i></a> -->
+                <!-- <a href="#"><i class="fa fa-pinterest-p"></i></a> -->
+                <!-- <a href="#"><i class="fa fa-twitter"></i></a>    -->
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="footer-main__col">
+                <h3>بخش های سایت</h3>
+                <a href="#">درباره ما</a>
+                <a href="#">نقشه سایت</a>
+                <a href="#">بوکمارک ها</a>
+                <a href="#">ورود / عضویت</a>
+            </div>
+            <div class="footer-main__col">
+                <h3>راهنما</h3>
+                <a href="#">راهنما</a>
+                <a href="#">ارتباط با ما</a>
+                <a href="#">بوکمارک ها</a>
+                <a href="#">ورود / عضویت</a>
+            </div>
+            <div class="footer-main__col">
+                <h3>همکاری با ما</h3>
+                <a href="#">فرصت های شغلی</a>
+                <a href="#">نقشه سایت</a>
+
+            </div>
+            <div class="footer-main__col">
+                <h3>موارد مهم</h3>
+                <a href="#">کوکی ها</a>
+                <a href="#">شرایط</a>
+                <a href="#">موارد امنیتی</a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+        const sidebar =  document.getElementById('active-sidebar'),
+            openSidebarIcon = document.getElementById('openSidebarIcon'),
+            closeSidebarIcon = document.getElementById('closeSidebarIcon'),
+            overlay = document.getElementById('overlay')
+
+
+        function openSidebar() {
+
+            sidebar.classList.remove('hiddens')
+            sidebar.classList.add('showens')
+
+
+            overlay.classList.add('overlay')
+            overlay.classList.remove('hidden')
+
+        }
+
+        function closeSidebar() {
+
+            sidebar.classList.remove('showens')
+            sidebar.classList.add('hiddens')
+
+
+            overlay.classList.add('hidden')
+            overlay.classList.remove('overlay')
+
+        }
+
+        openSidebarIcon.addEventListener('click' , () => openSidebar() )
+        closeSidebarIcon.addEventListener('click' , () => closeSidebar() )
+        overlay.addEventListener('click' , () => closeSidebar())
+        window.addEventListener('resize' , () => closeSidebar())
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.5/dist/sweetalert2.all.min.js"></script>
+    
+    <% let sweetalert = req.flash('sweetalert') %>
+        <% if(sweetalert.length) {  %>
+        <% let data = sweetalert[0] %>
+        <script>
+            Swal.fire({
+                title: '<%= data.title %>',
+                text:  '<%= data.message %>',
+                icon:  '<%= data.type %>',
+                showConfirmButton: "<%= data.button !== null ? true : false %>",
+                confirmButtonText: '<%= data.button %>',
+                timer : "<%= data.button !== null ? 'null' : data.timer %>"
+            })
+        </script>
+    <% } %> 
+
+
+    <%- script %> 
+</body>
+</html>

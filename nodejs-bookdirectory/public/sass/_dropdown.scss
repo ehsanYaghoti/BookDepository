@@ -1,0 +1,77 @@
+nav {
+    .first-menu-item {
+        padding: 0;
+    }
+    & > menu > .menuitem > a {
+        background-color: #fff;
+    }
+    // color: #fff;
+    .menuitem {
+        position: relative;
+        display: block;
+        align-items: center;
+        opacity: 0;
+        cursor: pointer;
+        z-index: 1000000000;
+        white-space: nowrap;
+        min-width: 190px;
+        background-color: white;
+        padding: 5px 10px;
+//     transition: opacity 0.6, transform 0s;
+        & > menu {
+            border-radius: 5px;
+            .menuitem {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+    }
+}
+
+nav .menuitem > menu {
+    position: absolute;
+    pointer-events: none;
+    
+}
+
+nav > menu > .menuitem { 
+    pointer-events: all; 
+    opacity:1; 
+}
+
+menu .menuitem a { 
+    white-space:nowrap; 
+    display:block; 
+    z-index: 999;
+
+}
+    
+ .menuitem:hover > menu {
+   pointer-events:initial;
+ }
+
+ nav:hover > menu > .menuitem:hover,
+ .menuitem:hover > menu > .menuitem,
+  menu:hover > .menuitem{
+   opacity:1;
+ }
+
+ nav > menu > .menuitem .menuitem menu {
+    transform:translateX(-100%);
+    top:0; left:0;
+ }
+ 
+ .menuitem > menu > .menuitem > menu > .menuitem{
+    transition: transform 0.6s, opacity 0.6s;
+    transform:translateX(195px) translateY(0%);
+    opacity: 0;
+ } 
+ .menuitem > menu > .menuitem:hover > menu > .menuitem,  
+ .menuitem > menu > .menuitem.hover > menu > .menuitem{  
+    transform:translateX(0) translateY(0%);
+    opacity: 1;
+ }
+
+
+

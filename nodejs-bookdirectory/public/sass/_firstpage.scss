@@ -1,0 +1,11 @@
+.main-page-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include MediaQueryMin($m){
+        flex-direction: row;
+        align-items: flex-start;
+        direction: rtl;
+        padding: 50px;
+    } 
+} 

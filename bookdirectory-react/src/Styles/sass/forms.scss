@@ -1,0 +1,169 @@
+@import './variables.scss';
+
+.succesSpan{
+    align-self : center ;
+    padding : 10px ;
+    background-color : green ;
+    color : white ;
+    border-radius : 5px ;
+    margin-bottom : 20px
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    // margin-top: 30px;
+    margin-bottom: 50px;
+    // width: 90%;
+    width: 1130px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    filter: drop-shadow(0  0  10px  rgba(0 , 0 , 0 , .1));
+    border-radius: 15px;
+    // width: 90%;
+    label {
+        text-align: right;
+        span {
+            margin-bottom: 10px;
+        }
+    }
+    .form-row-1 {
+        width: 100%;
+        // display: flex;
+        margin: 20px 0;
+        label {
+            width: 100%;
+            input {
+                width: 89%;
+            }
+        }
+
+    }
+    .form-row-2 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        label {    
+            display: flex;
+            align-items: center;
+            width: 50%;
+            white-space: nowrap;
+            input {
+                width: 77%;
+            }
+            .categorySelector{
+                width: 100%;
+            }
+        }
+        margin: 20px 0;
+
+    }
+    .form-row-3 {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 20px 0;
+        label {    
+            // width: 33%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            input {
+                // width: 77%;
+                margin-right: 10px;
+            }
+        }
+
+    }
+    .textArea-div{
+        label {
+            display: flex;
+            .textArea {
+                border: none;
+                border-radius: 5px;
+                width: 90%;
+                filter: drop-shadow(0  0  10px  rgba(0 , 0 , 0 , .1));
+                outline: none;
+                margin: 0 10px;
+            }
+        }
+    }
+
+    .categorySelector{
+        // background-color: blue;
+        // color: blue;
+        .css-1nmdiq5-menu{
+            height: 150px;
+            visibility: visible;
+            *{
+     
+                height: 150px;
+                * {
+                    height: fit-content;
+                }
+
+            }
+
+        }
+    }
+
+    .ck-blurred{
+        text-align: right;
+        height: 200px;
+    }
+    .ck-focused{
+        text-align: right;
+        height: 200px;
+    }
+    .ck.ck-editor__editable_inline[dir=ltr]{
+        text-align: right;
+    }
+
+    .selector {
+        align-self: flex-start;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        font-family: 'Vazir';
+        font-size: 1rem;
+        margin: 15px;
+        padding: 14px 10px;
+        width: 74%;
+        filter: drop-shadow(0  0  10px  rgba(0 , 0 , 0 , .1));
+        background-color: blue;
+        option {
+            height: 500px;
+            padding: 14px 10px;
+        }
+    }
+    input {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        font-family: 'Vazir';
+        font-size: .8rem;
+        margin: 15px;
+        padding: 14px 10px;
+        width: 250px;
+        filter: drop-shadow(0  0  10px  rgba(0 , 0 , 0 , .1));
+
+    }
+    .button {
+        // width: 100px;
+        font-family: 'Vazir';
+        padding: 10px 10px;
+        color: #ffffff;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: $green-2;
+        align-self: center;
+        margin-top: 15px;
+        &:hover{
+            opacity: .8;
+        }
+    }
+}

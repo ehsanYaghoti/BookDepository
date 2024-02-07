@@ -1,0 +1,6 @@
+# ./bookdirectory-react/node_modules/
+# ./nodejs-bookdirectory/node_modules/
+
+*/node_modules
+*/coverage
+*/DevelopingFiles
